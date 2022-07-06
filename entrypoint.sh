@@ -35,17 +35,17 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 
+cd "$CLONE_DIR"
+git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+
 for FILE in $INPUT_SOURCE_FOLDER
 do
     cp -r $FILE "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
     echo $FILE
 done
 
-cd "$CLONE_DIR"
-git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
-
-echo "Adding git commit"
 git add .
+echo "Adding git commit"
 git status
 if git status | grep -q "Changes to be committed"
 then
