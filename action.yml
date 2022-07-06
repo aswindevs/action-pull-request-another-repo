@@ -1,7 +1,7 @@
 name: 'Pull Request another repository'
 description: 'Used for pull request a copy of a folder to another repository'
 inputs:
-  source_folder:
+  source_folders:
     description: 'Source folder from origin'
     required: true
   destination_repo:
