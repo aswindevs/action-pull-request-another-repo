@@ -35,7 +35,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 
-for FILE in ${INPUT_SOURCE_FOLDER[@]}
+for FILE in $INPUT_SOURCE_FOLDER
 do
     cp -r $FILE "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
     echo $FILE

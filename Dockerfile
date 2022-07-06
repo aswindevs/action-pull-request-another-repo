@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine3.13
+FROM golang:1.18.3-alpine3.16
 
 RUN apk update && \
     apk upgrade && \
@@ -9,6 +9,6 @@ RUN apk update && \
     make && \
     mv ./bin/gh /usr/local/bin/
 
-COPY entrypoint.sh entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT [ "/bin/bash","entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
