@@ -44,7 +44,7 @@ done
 cd "$CLONE_DIR"
 ls
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
-
+git status
 git add .
 echo "Adding git commit"
 git status
