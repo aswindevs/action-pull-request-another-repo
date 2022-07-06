@@ -28,7 +28,6 @@ echo "Setting git variables"
 export GITHUB_TOKEN=$API_TOKEN_GITHUB
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
-
 rand=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 4 ;)
 
 echo "Cloning destination git repository"
@@ -45,7 +44,7 @@ do
 done
 cd "$CLONE_DIR"
 ls -al
-git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH-$rand"
+git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 git status
 git add .
 echo "Adding git commit"
@@ -54,12 +53,12 @@ if (git status | grep -q "Changes to be committed")
 then
   git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
   echo "Pushing git commit"
-  git push -u origin HEAD:"$INPUT_DESTINATION_HEAD_BRANCH-$rand"
+  git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   echo "Creating a pull request"
-  gh pr create -t "$INPUT_DESTINATION_HEAD_BRANCH-$rand" \
-               -b "$INPUT_DESTINATION_HEAD_BRANCH-$rand" \
+  gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
+               -b $INPUT_DESTINATION_HEAD_BRANCH \
                -B $INPUT_DESTINATION_BASE_BRANCH \
-               -H "$INPUT_DESTINATION_HEAD_BRANCH-$rand" \
+               -H $INPUT_DESTINATION_HEAD_BRANCH \
                   $PULL_REQUEST_REVIEWERS
 else
   echo "No changes detected"
