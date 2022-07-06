@@ -43,13 +43,10 @@ do
     echo $FILE
 done
 cd "$CLONE_DIR"
-ls -al
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH-$rand"
 
-git status
-git add .
 echo "Adding git commit"
-git status
+git add .
 if (git status | grep -q "Changes to be committed")
 then
   git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
