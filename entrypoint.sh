@@ -44,10 +44,8 @@ do
 done
 cd "$CLONE_DIR"
 ls -al
-git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
-git stash
-git pull origin "$INPUT_DESTINATION_HEAD_BRANCH"
-git stash pop
+git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH-$rand"
+
 git status
 git add .
 echo "Adding git commit"
@@ -56,12 +54,12 @@ if (git status | grep -q "Changes to be committed")
 then
   git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
   echo "Pushing git commit"
-  git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+  git push -u origin HEAD:"$INPUT_DESTINATION_HEAD_BRANCH-$rand"
   echo "Creating a pull request"
-  gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
-               -b $INPUT_DESTINATION_HEAD_BRANCH \
+  gh pr create -t "$INPUT_DESTINATION_HEAD_BRANCH-$rand" \
+               -b "$INPUT_DESTINATION_HEAD_BRANCH-$rand" \
                -B $INPUT_DESTINATION_BASE_BRANCH \
-               -H $INPUT_DESTINATION_HEAD_BRANCH \
+               -H "$INPUT_DESTINATION_HEAD_BRANCH-$rand" \
                   $PULL_REQUEST_REVIEWERS
 else
   echo "No changes detected"
