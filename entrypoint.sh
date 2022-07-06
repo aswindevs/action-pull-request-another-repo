@@ -48,7 +48,7 @@ git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 git add .
 echo "Adding git commit"
 git status
-if git status | grep -q "Changes to be committed"
+if (git status | grep -q "Changes to be committed")
 then
   git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
   echo "Pushing git commit"
