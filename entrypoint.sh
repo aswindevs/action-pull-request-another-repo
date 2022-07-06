@@ -45,7 +45,9 @@ done
 cd "$CLONE_DIR"
 ls -al
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
-git pull origin "$INPUT_DESTINATION_HEAD_BRANCH" 
+git stash
+git pull origin "$INPUT_DESTINATION_HEAD_BRANCH"
+git stash pop
 git status
 git add .
 echo "Adding git commit"
