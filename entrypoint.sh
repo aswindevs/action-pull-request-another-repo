@@ -3,11 +3,11 @@
 set -e
 set -x
 
-if [ -z "$INPUT_SOURCE_FOLDER" ]
-then
-  echo "Source folders must be defined"
-  return -1
-fi
+# if [ -z "$INPUT_SOURCE_FOLDER" ]
+# then
+#   echo "Source folders must be defined"
+#   return -1
+# fi
 
 if [ $INPUT_DESTINATION_HEAD_BRANCH == "main" ] || [ $INPUT_DESTINATION_HEAD_BRANCH == "master"]
 then
@@ -37,8 +37,8 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 
 for FILE in ${INPUT_SOURCE_FOLDER[@]}
 do
-    echo $FILE
     cp -r $FILE "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+    echo $FILE
 done
 
 cd "$CLONE_DIR"
