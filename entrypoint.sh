@@ -38,7 +38,7 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 for FILE in ${INPUT_SOURCE_FOLDER[@]}
 do
     echo $FILE
-    cp -r $FILE test4
+    cp -r $FILE "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 done
 
 cd "$CLONE_DIR"
