@@ -42,7 +42,7 @@ do
     echo $FILE
 done
 cd "$CLONE_DIR"
-ls
+ls -al
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 git status
 git add .
