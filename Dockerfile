@@ -11,4 +11,4 @@ RUN apk update && \
 
 COPY entrypoint.sh entrypoint.sh
 
-ENTRYPOINT [ "bash","entrypoint.sh" ]
+ENTRYPOINT [ "/bin/bash","entrypoint.sh" ]
