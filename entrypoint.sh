@@ -2,8 +2,8 @@
 
 set -e
 set -x
-input_source=($input_source)
-input_dest=($input_dest)
+input_source=($INPUT_SOURCE_FOLDERS)
+input_dest=($INPUT_DESTINATION_FOLDER)
 if [ -z "$input_source" ]
 then
   echo "Source folders must be defined"
