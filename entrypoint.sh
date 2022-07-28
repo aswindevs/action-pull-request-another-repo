@@ -2,14 +2,15 @@
 
 set -e
 set -x
-
-if [ -z "$INPUT_SOURCE_FOLDERS" ]
+input_source=($input_source)
+input_dest=($input_dest)
+if [ -z "$input_source" ]
 then
   echo "Source folders must be defined"
   return -1
 fi
 
-if [ "${#INPUT_SOURCE_FOLDERS[@]}" != "${#INPUT_DESTINATION_FOLDER[@]}" ]
+if [ "${#input_source[@]}" != "${#input_dest[@]}" ]
 then
   echo "Invalid length for source and destination folder"
   exit 1
@@ -42,10 +43,10 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 echo "Copying contents to git repo"
 
 
-for i in "${!INPUT_SOURCE_FOLDERS[@]}"; do
-    mkdir -p $CLONE_DIR/${INPUT_DESTINATION_FOLDER[i]}/
-    cp -r ${INPUT_SOURCE_FOLDERS[i]} "$CLONE_DIR/${INPUT_DESTINATION_FOLDER[i]}"
-    echo "${INPUT_SOURCE_FOLDERS[i]} ${INPUT_DESTINATION_FOLDER[i]}"
+for i in "${!input_source[@]}"; do
+    mkdir -p $CLONE_DIR/${input_dest[i]}/
+    cp -r ${input_source[i]} "$CLONE_DIR/${input_dest[i]}"
+    echo "${input_source[i]} ${input_dest[i]}"
 done
 cd "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH-$rand"
