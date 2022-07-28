@@ -1,5 +1,12 @@
-FROM golang:1.18.3-alpine3.16
+FROM bash
+RUN apk add --no-cache git make musl-dev go
 
+# Configure Go
+ENV GOROOT /usr/lib/go
+ENV GOPATH /go
+ENV PATH /go/bin:$PATH
+
+RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
 RUN apk update && \
     apk upgrade && \
     apk add build-base && \
